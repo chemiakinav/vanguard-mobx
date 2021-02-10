@@ -8,6 +8,7 @@ import config from '../../webpack.dev.config.js'
 const app = express(),
             DIST_DIR = __dirname,
             HTML_FILE = path.join(DIST_DIR, 'index.html'),
+            // @ts-ignore
             compiler = webpack(config)
 
 app.use(webpackDevMiddleware(compiler, {
@@ -17,7 +18,7 @@ app.use(webpackDevMiddleware(compiler, {
 app.use(webpackHotMiddleware(compiler))
 
 app.get('*', (req, res, next) => {
-  compiler.outputFileSystem.readFile(HTML_FILE, (err, result) => {
+  compiler.inputFileSystem.readFile(HTML_FILE, (err, result) => {
   if (err) {
     return next(err)
   }

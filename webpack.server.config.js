@@ -11,8 +11,8 @@
 
  module.exports = (env, argv) => {
    const SERVER_PATH = (argv.mode === 'production') ?
-     './src/server/server-prod.js' :
-     './src/server/server-dev.js'
+     './src/server/server-prod.ts' :
+     './src/server/server-dev.ts'
 
    return ({
      entry: {
@@ -33,16 +33,16 @@
      externals: [nodeExternals()], // Need this to avoid error when working with Express
      module: {
        rules: [
-         {
-           // Transpiles ES6-8 into ES5
-           test: /\.js$/,
-           exclude: /node_modules/,
-           use: {
-             loader: "babel-loader"
-           }
-         }
+        {
+          test: /\.tsx?$/,
+          use: 'ts-loader',
+          exclude: /node_modules/,
+        },
        ]
-     }
+     },
+     resolve: {
+      extensions: ['.ts', '.js'],
+    },
    })
  }
 
