@@ -8,7 +8,6 @@ const BookView = observer(( { book } : { book: Book}) => {
   let { bookId } = useParams<{bookId: string}>();
   useEffect(() => {
     book.fetchBook(bookId)
-    return () => book.clearBook()
   }, [])
   const coverPath = (id: string) => `https://covers.openlibrary.org/b/id/${id}-M.jpg`
   return (
@@ -16,11 +15,10 @@ const BookView = observer(( { book } : { book: Book}) => {
       <h1>Book</h1>
       {book.state !== 'pending' && (
         <>
-          <div className="book-page__title">{book.book.title}</div>
+          <div className="book-page__title">{book.title}</div>
           <div className="book-page__cover">
-            <img src={coverPath(book.book.covers[0])} />
+            <img src={coverPath(book.covers[0])} />
           </div>
-          <div className="book-page__description">{book.book.description}</div>
         </>
       )}
     </div>

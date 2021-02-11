@@ -1,9 +1,9 @@
 import { flow, makeAutoObservable } from 'mobx'
 
-import { BookType } from '../types/bookType';
 
 export class Book {
-  book = {} as BookType
+  title: string = ''
+  covers: string[] = []
   state: string = 'pending'
 
   constructor() {
@@ -17,14 +17,11 @@ export class Book {
     try {
       const response = yield fetch(`https://openlibrary.org/books/${bookId}.json`).then(response => response.json())
       this.state = 'done'
-      this.book = response
+      this.title = response.title
+      this.covers = response.covers
     } catch (error) {
       this.state = 'error'
     }
-  }
-
-  clearBook() {
-    this.book = {} as BookType
   }
 }
 

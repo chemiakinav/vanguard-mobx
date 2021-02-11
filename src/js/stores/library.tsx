@@ -16,7 +16,7 @@ export class Library {
     this.libraryBooks = []
     this.state = 'pending'
     try {
-      const response = yield fetch('http://openlibrary.org/people/george08/lists/OL97L/seeds.json').then(response => response.json())
+      const response = yield fetch('http://openlibrary.org/people/george08/lists/OL97L/seeds.json', { headers: { 'Referer': 'no-referrer' }}).then(response => response.json())
       this.state = 'done'
       this.libraryBooks = response.entries
     } catch (error) {
