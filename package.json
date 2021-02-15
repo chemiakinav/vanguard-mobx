@@ -7,9 +7,9 @@
     "test": "jest",
     "coverage": "jest --coverage",
     "buildDev": "rm -rf dist && webpack --mode development --display-error-details --config webpack.server.config.js && webpack --display-error-details --mode development --config webpack.dev.config.js",
-    "buildProd": "rm -rf dist && webpack --mode production --config webpack.server.config.js && webpack --mode production --config webpack.prod.config.js",
+    "build": "rm -rf dist && webpack --mode production --config webpack.server.config.js && webpack --mode production --config webpack.prod.config.js",
     "dev": "npm run buildDev && node ./dist/server.js",
-    "prod": "npm run buildProd && node ./dist/server.js"
+    "start": "node ./dist/server.js"
   },
   "keywords": [],
   "author": "",
